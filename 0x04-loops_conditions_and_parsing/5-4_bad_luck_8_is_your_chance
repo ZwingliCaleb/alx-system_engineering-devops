@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# script to display bad luck for the 4th loop iteration, good luck for the 8th and Best school for others
+
+i=0;
+
+while ((i < 10))
+do
+	if ((i == 3))
+		then
+			echo "bad luck"
+		elif ((i == 7))
+		then
+			echo "good luck"
+		else
+			echo "Best School"
+	fi
+	((i++))
+done
