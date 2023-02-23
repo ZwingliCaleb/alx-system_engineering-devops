@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# A bash script that displays:
+
+# The content of the current directory
+# in list format
+# Where only the part of the name after the first dash is displayed
+
+for p in *
+do
+	echo "${p/*-/}"
+done
