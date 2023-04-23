@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script to create RSA keypair
+
+ssh-keygen -t rsa -b 4096 -f school -N betty
