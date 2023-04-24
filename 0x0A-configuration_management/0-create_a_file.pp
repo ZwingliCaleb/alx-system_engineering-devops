@@ -3,6 +3,6 @@
 
 file {'/tmp/school':
 content => 'I Love Puppet',
-owner => 'www-data',
-group => 'www-data',
-mode => '0744'}
+owner 	=> 'www-data',
+group 	=> 'www-data',
+mode 	=> '0744'}
