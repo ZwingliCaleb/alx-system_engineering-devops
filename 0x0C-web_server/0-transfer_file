@@ -2,7 +2,7 @@
 # This script transfers a file from our client to server
 
 FilePath = $1
-IP = $2
+IPaddress = $2
 UserName = $3
 KeyPath = $4
 if [ $# -lt 3 ]; then
