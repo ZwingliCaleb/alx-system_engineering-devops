@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# make the first task short and sweet; debug port 80 with 5 or less lines and can't use:- ;,&&,wget
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+service nginx restart
+pkill -o nginx
