@@ -2,6 +2,10 @@
 # We're to configure Nginx so that it's http response contains a custom header
 # We're to write 0-custom_http_response_header so that it configures a brand  new ubuntu machine
 
+#!/usr/bin/env bash
+# We're to configure Nginx so that it's http response contains a custom header
+# We're to write 0-custom_http_response_header so that it configures a brand  new ubuntu machine
+
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
@@ -23,4 +27,3 @@ string_for_replacement="listen 80 default_server;\n\terror_page 404 \/404.html;\
 sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
 sudo service nginx restart
-
