@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# We're to configure Nginx so that it's http response contains a custom header
+# We're to write 0-custom_http_response_header so that it configures a brand  new ubuntu machine
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+sudo mkdir -p /var/www/html
+sudo chmod -R 755 /var/www
+
+# To create an index page
+echo 'Hello World!' |sudo tee /var/www/html/index.html
+
+# creating error 404 webpage
+echo 'Page not available' |sudo tee /var/www/html/404.html
+
+
+string_for_replacement="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/www.github.com/ZwingliCaleb permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+string_for_replacement="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
+
