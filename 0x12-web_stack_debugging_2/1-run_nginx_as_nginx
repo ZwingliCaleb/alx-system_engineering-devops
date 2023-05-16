@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Kill Apache processes
+pkill apache2
+
+# Update default server configuration
+sed -i 's/80 default_server/8080 default_server/' /etc/nginx/sites-available/default
+
+# Change ownership and permissions of nginx.conf
+chown nginx:nginx /etc/nginx/nginx.conf
+chmod 700 /etc/nginx/nginx.conf
+
+# Reload and restart Nginx
+service nginx reload
+service nginx restart
+
