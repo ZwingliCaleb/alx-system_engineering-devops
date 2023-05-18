@@ -2,10 +2,6 @@
 # We're to configure Nginx so that it's http response contains a custom header
 # We're to write 0-custom_http_response_header so that it configures a brand  new ubuntu machine
 
-#!/usr/bin/env bash
-# We're to configure Nginx so that it's http response contains a custom header
-# We're to write 0-custom_http_response_header so that it configures a brand  new ubuntu machine
-
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
@@ -17,7 +13,7 @@ sudo chmod -R 755 /var/www
 echo 'Hello World!' |sudo tee /var/www/html/index.html
 
 # creating error 404 webpage
-echo 'Page not available' |sudo tee /var/www/html/404.html
+echo 'Ceci n'est pas une page' |sudo tee /var/www/html/404.html
 
 
 string_for_replacement="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/www.github.com/ZwingliCaleb permanent;"
