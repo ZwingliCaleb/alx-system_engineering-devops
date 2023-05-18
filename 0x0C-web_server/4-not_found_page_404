@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
-# Script that configures a new Ubuntu machine to respect above requirements
+# Script that configures a new Ubuntu machine to match the task requirements
 
 sudo apt-get update
 sudo apt-get install -y nginx
 
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo sed -i '/server_name _;/a \\\trewrite ^/redirect_me https://www.blog.ehoneahobed.com permanent;' /etc/nginx/sites-enabled/default
-
-sudo sed -i '/listen 80 default_server;/a \\\n\terror_page 404 /404.html;' /etc/nginx/sites-enabled/default
+sudo sed -i '/server_name _;/a \\\trewrite ^/redirect_me https://www.blog.ehoneahobed.com permanent;' /etc/nginx/sites-available/default
 
 sudo tee /var/www/html/404.html <<EOT
 <!DOCTYPE html>
@@ -26,4 +24,7 @@ sudo tee /var/www/html/404.html <<EOT
 </html>
 EOT
 
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
 sudo service nginx restart
+
