@@ -17,8 +17,11 @@ sudo tee /var/www/html/404.html <<EOT
     <title>404 Not Found</title>
 </head>
 <body>
-    <h1>404 Not Found</h1>
-    <p>Ceci n'est pas une page.</p>
+    <center><h1>404 Not Found</h1></center>
+    <hr>
+    <center>Ceci n'est pas une page.</center>
+    <hr>
+    <center>nginx/1.18.0 (Ubuntu)</center>
 </body>
 </html>
 EOT
