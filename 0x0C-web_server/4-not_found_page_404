@@ -1,38 +1,26 @@
 #!/usr/bin/env bash
-# Configuration of nginx to have a custom 404 page
+# Script that configures a new Ubuntu machine to respect above requirements
 
 sudo apt-get update
-sudo apt-get install nginx -y
-sudo ufw allow 'Nginx HTTP'
-sudo mkdir -p /var/www/html/ /var/www/error
-sudo chmod -R 755 /var/www
-echo 'Hello World!' | sudo tee -a /var/www/html/index.html
-echo -e "Ceci n'est pas une page" | sudo tee -a /var/www/error/404.html
+sudo apt-get install -y nginx
 
-ServerConf=\
-"server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
-        server_name _;
-        location / {
-                try_files \$uri \$uri/ =404;
-        }
-        if (\$request_filename ~ redirect_me){
-                rewrite ^ https://github.com/emediongfrancis permanent;
-        }
-        error_page 404 /404.html;
-        location = /404.html {
-                root /var/www/error/;
-                internal;
-        }
-}"
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-sudo bash -c "echo -e '$ServerConf' > /etc/nginx/sites-enabled/default"
+sudo sed -i '/server_name _;/a \\\trewrite ^/redirect_me https://www.blog.ehoneahobed.com permanent;' /etc/nginx/sites-enabled/default
 
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-        sudo service nginx start
-else
-        sudo service nginx restart
-fi
+sudo sed -i '/listen 80 default_server;/a \\\n\terror_page 404 /404.html;' /etc/nginx/sites-enabled/default
+
+sudo tee /var/www/html/404.html <<EOT
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 Not Found</title>
+</head>
+<body>
+    <h1>404 Not Found</h1>
+    <p>Ceci n'est pas une page.</p>
+</body>
+</html>
+EOT
+
+sudo service nginx restart
