@@ -11,8 +11,8 @@ server_config=\
 frontend  zwart-front
         bind *:80
         mode http
-        default_backend zwart_back
-backend zwart-back
+        default_backend zwart_backend
+backend zwart-backend
         balance roundrobin
         server 165722-web-01 54.237.116.139:80 check
         server 165722-web-02 34.207.212.66:80 check
