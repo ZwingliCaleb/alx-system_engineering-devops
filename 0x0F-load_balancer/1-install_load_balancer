@@ -8,7 +8,7 @@ apt-get -y install haproxy
 # edit config file
 server_config=\
 "
-frontend  zwart-front
+frontend  zwart-frontend
         bind *:80
         mode http
         default_backend zwart_backend
