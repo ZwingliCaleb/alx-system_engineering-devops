@@ -2,25 +2,25 @@
 # Create a script to install and configure HAProxy on lb-01 server
 # Configuration on HAProxy should send traffic to web-01 and web-02 servers
 
-sudo apt-get -y update
-sudo apt-get -y install haproxy
+sudo apt-get update
+sudo apt-get install -y haproxy
 
 # edit config file
-server_config=\
-"
-frontend  zwart-frontend
+server_config="
+frontend  calebs-frontend
         bind *:80
         mode http
-        default_backend zwart_backend
-backend zwart-backend
+        default_backend calebs-backend
+backend calebs-backend
         balance roundrobin
         server 165722-web-01 54.237.116.139:80 check
         server 165722-web-02 34.207.212.66:80 check
 "
-echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+echo "$server_config" | sudo tee /etc/haproxy/haproxy.cfg >/dev/null
 
 # enable haproxy to be started by init script
 
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+echo "ENABLED=1" | sudo tee /etc/default/haproxy >/dev/null
 
 sudo service haproxy restart
