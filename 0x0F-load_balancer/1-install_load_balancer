@@ -3,7 +3,7 @@
 # Configuration on HAProxy should send traffic to web-01 and web-02 servers
 
 sudo apt-get -y update
-apt-get -y install haproxy
+sudo apt-get -y install haproxy
 
 # edit config file
 server_config=\
