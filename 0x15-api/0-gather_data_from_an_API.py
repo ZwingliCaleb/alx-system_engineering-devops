@@ -8,6 +8,7 @@ using a REST API.
 import requests
 import sys
 
+
 def get_employee_todo_progress(employee_id):
     """
     Retrieves and displays information about an employee's TODO list progress.
@@ -20,19 +21,21 @@ def get_employee_todo_progress(employee_id):
     """
     url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     response = requests.get(url)
+
     if response.status_code == 200:
         employee_data = response.json()
         employee_name = employee_data.get('name')
 
         todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
         todo_response = requests.get(todo_url)
+
         if todo_response.status_code == 200:
             todos = todo_response.json()
             total_tasks = len(todos)
             completed_tasks = [todo for todo in todos if todo.get('completed')]
             num_completed_tasks = len(completed_tasks)
 
-            print(f"Employee {employee_name} is done with tasks({num_completed_tasks}/{total_tasks}):")
+            print(f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_tasks}):")
             for task in completed_tasks:
                 print(f"\t{task.get('title')}")
         else:
@@ -48,4 +51,3 @@ if __name__ == '__main__':
 
     employee_id = int(sys.argv[1])
     get_employee_todo_progress(employee_id)
-
