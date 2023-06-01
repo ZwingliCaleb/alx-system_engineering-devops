@@ -1,57 +1,56 @@
 #!/usr/bin/python3
 
+'''
+    Gathers data from an API and exports it in CSV format.
+'''
+
+import csv
 import requests
-import sys
-import json
+from sys import argv
 
-def export_employee_tasks_to_json(employee_id):
-    base_url = 'https://jsonplaceholder.typicode.com'
-    employee_url = f'{base_url}/users/{employee_id}'
-    todos_url = f'{base_url}/todos?userId={employee_id}'
+def exportToCSV(user_id):
+    '''
+        Gets data from an API and exports it to CSV.
+    '''
+    users_url = 'https://jsonplaceholder.typicode.com/users'
+    todos_url = 'https://jsonplaceholder.typicode.com/todos'
 
-    try:
-        # Fetch employee details
-        employee_response = requests.get(employee_url)
-        employee_data = employee_response.json()
+    users = requests.get(users_url).json()
+    todos = requests.get(todos_url).json()
 
-        if employee_response.status_code != 200:
-            print(f"Error: Failed to retrieve employee data. Status code: {employee_response.status_code}")
-            return
+    employee = None
+    tasks = []
 
-        # Fetch TODO list for the employee
-        todos_response = requests.get(todos_url)
-        todos_data = todos_response.json()
+    for user in users:
+        if user.get('id') == int(user_id):
+            employee = user.get('name')
+            break
 
-        if todos_response.status_code != 200:
-            print(f"Error: Failed to retrieve TODO list data. Status code: {todos_response.status_code}")
-            return
+    if employee is None:
+        print(f"No employee found with ID {user_id}")
+        return
 
-        # Filter and format employee tasks
-        employee_tasks = []
-        for task in todos_data:
-            employee_tasks.append({
-                'task': task['title'],
-                'completed': task['completed'],
-                'username': employee_data['username']
-            })
+    for todo in todos:
+        if todo.get('userId') == int(user_id):
+            task_title = todo.get('title')
+            task_status = str(todo.get('completed'))
+            tasks.append([user_id, employee, task_status, task_title])
 
-        # Create JSON data
-        json_data = { str(employee_id): employee_tasks }
+    if len(tasks) == 0:
+        print(f"No tasks found for employee {employee}")
+        return
 
-        # Export to JSON file
-        file_name = f"{employee_id}.json"
-        with open(file_name, 'w') as file:
-            json.dump(json_data, file)
+    filename = f"{user_id}.csv"
 
-        print(f"Tasks exported to {file_name}")
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(tasks)
 
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {str(e)}")
+    print(f"Data exported to {filename} successfully!")
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print("Error: Invalid number of arguments. Usage: python script_name.py employee_id")
+    if len(argv) < 2:
+        print("Please provide a user ID as a command-line argument.")
     else:
-        employee_id = int(sys.argv[1])
-        export_employee_tasks_to_json(employee_id)
-
+        exportToCSV(argv[1])
+        
