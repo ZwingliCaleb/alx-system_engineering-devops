@@ -31,7 +31,7 @@ def get_employee_todo_progress(employee_id):
         if todo_response.status_code == 200:
             todos = todo_response.json()
             total_tasks = len(todos)
-            completed_tasks = [todo for todo in todos if todo.get('completed')]
+            completed_tasks = [task for task in todos if task.get('completed')]
             num_completed_tasks = len(completed_tasks)
 
             employee_progress = {
@@ -39,12 +39,12 @@ def get_employee_todo_progress(employee_id):
                 "employee_name": employee_name,
                 "tasks_completed": num_completed_tasks,
                 "total_tasks": total_tasks,
-                "completed_tasks": [task.get('title') for task in completed_tasks]
+                "completed_tasks": [{"task": task.get('title'), "completed": task.get('completed')} for task in completed_tasks]
             }
 
             return employee_progress
 
-        print(f"Failed to retrieve TODO list for employee {employee_name}.")
+        print(f"No tasks found for employee {employee_name}.")
     else:
         print(f"Employee with ID {employee_id} not found.")
 
@@ -79,4 +79,3 @@ if __name__ == '__main__':
 
     if employee_progress:
         export_to_json(employee_id, employee_progress)
-
