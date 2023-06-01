@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" This is a script to import data from an API """
 
 import requests
 import sys
