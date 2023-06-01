@@ -23,7 +23,7 @@ def exportToCSV(user_id):
 
     for user in users:
         if user.get('id') == int(user_id):
-            employee = user.get('name')
+            employee = user.get('username')
             break
 
     if employee is None:
@@ -53,4 +53,3 @@ if __name__ == '__main__':
         print("Please provide a user ID as a command-line argument.")
     else:
         exportToCSV(argv[1])
-        
