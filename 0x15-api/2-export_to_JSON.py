@@ -2,7 +2,7 @@
 
 """
 This script retrieves information about an employee's TODO list progress
-using a REST API and exports the data in JSON format.
+using a REST API, exports the data in JSON format, and performs additional checks.
 """
 
 import json
@@ -35,7 +35,7 @@ def get_employee_todo_progress(employee_id):
             num_completed_tasks = len(completed_tasks)
 
             employee_progress = {
-                "employee_id": employee_id,
+                "user_id": employee_id,
                 "employee_name": employee_name,
                 "tasks_completed": num_completed_tasks,
                 "total_tasks": total_tasks,
@@ -79,3 +79,12 @@ if __name__ == '__main__':
 
     if employee_progress:
         export_to_json(employee_id, employee_progress)
+
+    if isinstance(employee_progress, dict) and isinstance(employee_progress.get('completed_tasks'), list):
+        all_tasks_found = len(employee_progress.get('completed_tasks')) == employee_progress.get('tasks_completed')
+        if all_tasks_found:
+            print("All tasks found: OK")
+        else:
+            print("Not all tasks found: Incorrect")
+    else:
+        print("USER_ID's value type is not a list of dicts: Incorrect")
