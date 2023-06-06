@@ -26,7 +26,9 @@ def get_employee_todo_progress(employee_id):
         employee_data = response.json()
         employee_name = employee_data.get('name')
 
-        todo_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+        todo_url = (
+            f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+        )
         todo_response = requests.get(todo_url)
 
         if todo_response.status_code == 200:
