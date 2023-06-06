@@ -7,8 +7,8 @@
 
 from requests import get
 
-reddit = "https://www.reddit.com/"
-headers = {'user-agent': 'my-app/0.0.1'}
+REDDIT = "https://www.reddit.com/"
+HEADERS = {'user-agent': 'my-app/0.0.1'}
 
 
 def recurse(subreddit, hot_list=[], after=""):
