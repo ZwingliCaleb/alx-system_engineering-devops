@@ -42,7 +42,7 @@ def get_employee_todo_progress(employee_id):
             for task in completed_tasks:
                 print(f"\t{task.get('title')}")
         else:
-            print(f"Failed to retrieve TODO list for employee {employee_name}.")
+            print(f"Fail to retrieve TODO list for employee {employee_name}.")
     else:
         print(f"Employee with ID {employee_id} not found.")
 
