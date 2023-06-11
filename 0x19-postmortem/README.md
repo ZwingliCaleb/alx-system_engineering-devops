@@ -20,14 +20,15 @@ Complains obtained as a result of the slow loading times came from about a hundr
 
 **Suspected Cause**
 
-The main cause for the outage that was experienced for close to an hour and a half was conclusively attributed to scalability issues, It was discovered that not enough measures had been put in place to cater for a surge in the number of requests our servers could get at particular instances.
+The main cause for the outage that was experienced for close to an hour and a half was conclusively attributed to inadequate scalability systems and techniques. It was discovered that not enough measures had been put in place to cater for a surge in the number of requests our servers could get at particular instances. The failure to stay ready for when such situations were to actualize was what took us down for a considerable amount of time.
+
 It is worth noting that 6 hours before the complaint an online marketing/advertisement campaign had just been had been commenced and was ongoing. It is suspected that this could be the case and such a number had not been expected to make request or atleast overbear our systems hence cause a resource overload and finally cause the timely collapse.
 
 **Resolution**
 
-* Our lead DevOps engineer with assistance of the rest of the engineering department upgraded our webstack architecture system to include dynamic scaling abilities in that the system could intelligently distribute resources based on the patterns and number of requests in real -time to avoid another failure.
+* Our lead DevOps engineer with assistance of the rest of the engineering department upgraded our web stack architecture and it's system to include dynamic scaling abilities in that the system could intelligently without any aid whatsoever to distribute resources based on the patterns and number of requests in real -time so as to avoid human intervention in such situations and also automatically handle requests. This would reduce human caused errors due to little interraction and also make it less cumbersome to deal with. This would also ensure little to no failure due to the continous learning of patterns and adapting to them.
 
-* We also optimized our system. Caching mechanisms, resource analyzation techniques and query optimizations were done to make the system more efficient.
+* Secondly, we optimized our web stack system. We implemented caching mechanisms, resource analyzation techniques to ensure that all data collected regarding the traffic received and behaviour of various demographics based on external factors such as the marketing we did, would give us a clear picture of what to expect in the future for such scenarios. We finally did query optimizations to make sure that the system operated even more efficiently.
 
 ### Corrective and Preventative measures
 
