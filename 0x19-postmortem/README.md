@@ -12,6 +12,6 @@ Complains obtained as a result of the slow loading times came from about a hundr
 
 * 2317HRS - This issue is escalatedand other engineers are brought onboard to bring the system back to it's feet.
 
-* 0029HRS - The issue causing the outage is fixed; The architecture of the webstack system is updated to ensure that dynamic scaling is properly implemented so that in scenarios where ther is a hike in traffic, their is no throttle that would lead to an ultimate failure.
+* 0029HRS - The issue causing the outage is fixed; The architecture of the webstack system is updated to ensure that dynamic scaling is properly implemented so that in scenarios where there is a hike in traffic, their is no throttle that would lead to an ultimate failure.
 
 
