@@ -1,4 +1,5 @@
 # OUTAGE POSTMORTEM REPORT
+![image_processing20200107-2818-1ddtbyx](https://github.com/ZwingliCaleb/alx-system_engineering-devops/assets/84632961/3b8347bf-908e-455a-803b-49cfe85316de)
 
 ### Summary
 
