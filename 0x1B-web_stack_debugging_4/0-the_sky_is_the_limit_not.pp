@@ -1,23 +1,6 @@
 # This Puppet manifest fixes the stack to reduce errors in Nginx configuration
-
-# Check if the nginx configuration file exists
-if File.exists?('/etc/default/nginx') {
-  # Read the current file limit
-  $file_limit = inline_template('<%= %x(ulimit -n).strip %>')
-
-  # Update the nginx configuration file with the current file limit
-  file { '/etc/default/nginx':
-    ensure  => present,
-    content => template('example/nginx.erb'),
-    require => Package['nginx'],
-    notify  => Service['nginx'],
-  }
+exec { 'Limit':
+  command => '/usr/bin/env sed -i s/15/2000/ /etc/default/nginx',
 }
-
-# Define the Nginx service
-service { 'nginx':
-  ensure  => running,
-  enable  => true,
-  require => Package['nginx'],
-}
+exec { '/usr/bin/env service nginx restart': }
 
